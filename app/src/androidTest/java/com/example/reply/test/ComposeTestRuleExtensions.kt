@@ -17,7 +17,9 @@ package com.example.reply.test
 
 import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
@@ -45,8 +47,7 @@ fun <A : ComponentActivity> AndroidComposeTestRule<ActivityScenarioRule<A>, A>.o
  * and passes it to [onNodeWithContentDescription] function as argument and
  * returns the [SemanticsNodeInteraction] object.
  */
-fun <A : ComponentActivity> AndroidComposeTestRule<ActivityScenarioRule<A>, A>
-        .onNodeWithContentDescriptionForStringId(
+fun <A : ComponentActivity> AndroidComposeTestRule<ActivityScenarioRule<A>, A>.onNodeWithContentDescriptionForStringId(
     @StringRes id: Int
 ): SemanticsNodeInteraction = onNodeWithContentDescription(activity.getString(id))
 
@@ -59,7 +60,10 @@ fun <A : ComponentActivity> AndroidComposeTestRule<ActivityScenarioRule<A>, A>
  * and passes it to [onNodeWithTag] function as argument and
  * returns the [SemanticsNodeInteraction] object.
  */
-fun <A : ComponentActivity> AndroidComposeTestRule<ActivityScenarioRule<A>, A>
-        .onNodeWithTagForStringId(
+fun <A : ComponentActivity> AndroidComposeTestRule<ActivityScenarioRule<A>, A>.onNodeWithTagForStringId(
     @StringRes id: Int
 ): SemanticsNodeInteraction = onNodeWithTag(activity.getString(id))
+
+fun <A : ComponentActivity> AndroidComposeTestRule<ActivityScenarioRule<A>, A>.hasStringId(
+    @StringRes id: Int
+): SemanticsMatcher = hasText(activity.getString(id))
